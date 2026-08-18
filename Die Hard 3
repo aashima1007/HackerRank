@@ -1,0 +1,29 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int gcd(int a, int b) {
+    while(b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+bool canMeasure(int a, int b, int c) {
+    if (c > max(a, b)) return false;
+    return (c % gcd(a, b) == 0);
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if (canMeasure(a, b, c)) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+    return 0;
+}
