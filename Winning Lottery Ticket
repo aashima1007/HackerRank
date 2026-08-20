@@ -1,0 +1,20 @@
+def winningLotteryTicket(tickets):
+    count = [0] * 1024
+
+    for ticket in tickets:
+        mask = 0
+        for ch in ticket:
+            mask |= 1 << int(ch)
+        count[mask] += 1
+
+    ans = 0
+
+    for i in range(1024):
+        for j in range(i, 1024):
+            if i | j == 1023:
+                if i == j:
+                    ans += count[i] * (count[i] - 1) // 2
+                else:
+                    ans += count[i] * count[j]
+
+    return ans
